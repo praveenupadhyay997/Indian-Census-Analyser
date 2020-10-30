@@ -1,4 +1,10 @@
-﻿using IndianCensusDataClass.DTO;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IndianCensusDataClass.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator Name="Praveen Kumar Upadhyay"/>
+// --------------------------------------------------------------------------------------------------------------------
+using IndianCensusDataClass.DTO;
 using System;
 using System.Collections.Generic;
 
