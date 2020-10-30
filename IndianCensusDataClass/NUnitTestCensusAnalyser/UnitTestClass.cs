@@ -22,6 +22,7 @@ namespace NUnitTestCensusAnalyser
         
         public static string wrongIndianStateCodeFilePath = @"C:\Program files(x64)\Microsoft Visual Studio\BridgeLabzAssignments\Indian-Census-Analyser\IndianCensusDataClass\IndianCensusDataClass\CSVFiles\IndiaStateCode.csv";
         public static string wrongIndianStateCodeFileType = @"F:\Program files(x64)\Microsoft Visual Studio\BridgeLabzAssignments\Indian-Census-Analyser\IndianCensusDataClass\IndianCensusDataClass\CSVFiles\IndiaStateCode.txt";
+        public static string wrongDelimeterIndianStateCodeFilePath = @"F:\Program files(x64)\Microsoft Visual Studio\BridgeLabzAssignments\Indian-Census-Analyser\IndianCensusDataClass\IndianCensusDataClass\CSVFiles\DelimiterIndiaStateCode.csv";
 
         CensusAnalyser censusAnalyser;
         Dictionary<string, CensusDTO> totalRecord;
@@ -109,6 +110,15 @@ namespace NUnitTestCensusAnalyser
         {
             var indianStateCensusResult = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(CensusAnalyser.Country.INDIA, wrongIndianStateCodeFileType, indianStateCodeHeaders));
             Assert.AreEqual(CensusAnalyserException.Exception.INVALID_FILE_TYPE, indianStateCensusResult.exception);
+        }
+        /// <summary>
+        /// TC 2.4 - To pass a wrong delimeter in the Indian State Code File and the correct file name and assert whether the custom exception of file not found is returned or not
+        /// </summary>
+        [Test]
+        public void GivenWrongStateCodeDelimeter_ShouldReturnCustomException()
+        {
+            var indianStateCensusResult = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(CensusAnalyser.Country.INDIA, wrongDelimeterIndianStateCodeFilePath, indianStateCodeHeaders));
+            Assert.AreEqual(CensusAnalyserException.Exception.INCOREECT_DELIMITER, indianStateCensusResult.exception);
         }
     }
 }
