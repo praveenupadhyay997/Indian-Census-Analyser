@@ -65,7 +65,16 @@ namespace NUnitTestCensusAnalyser
             Assert.AreEqual(CensusAnalyserException.Exception.INVALID_FILE_TYPE, indianStateCensusResult.exception);
         }
         /// <summary>
-        /// TC 1.4 - To pass a wrong header in the Indian Census File and the correct file name and assert whether the custom exception of incorrect header is returned or not
+        /// TC 1.4 - To pass a wrong delimeter in the Indian Census File and the correct file name and assert whether the custom exception of file not found is returned or not
+        /// </summary>
+        [Test]
+        public void GivenWrongDelimeter_ShouldReturnCustomException()
+        {
+            var indianStateCensusResult = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(CensusAnalyser.Country.INDIA, wrongDelimeterIndianStateCensusFilePath, indianStateCensusHeaders));
+            Assert.AreEqual(CensusAnalyserException.Exception.INCOREECT_DELIMITER, indianStateCensusResult.exception);
+        }
+        /// <summary>
+        /// TC 1.5 - To pass a wrong header in the Indian Census File and the correct file name and assert whether the custom exception of incorrect header is returned or not
         /// </summary>
         [Test]
         public void GivenWrongHeader_ShouldReturnCustomException()
