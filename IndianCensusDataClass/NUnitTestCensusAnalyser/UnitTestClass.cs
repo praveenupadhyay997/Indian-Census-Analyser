@@ -14,7 +14,9 @@ namespace NUnitTestCensusAnalyser
         public static string indianStateCodeHeaders = "SrNo,State Name,TIN,StateCode";
         public static string indianStateCensusFilePath = @"F:\Program files(x64)\Microsoft Visual Studio\BridgeLabzAssignments\Indian-Census-Analyser\IndianCensusDataClass\IndianCensusDataClass\CSVFiles\IndiaStateCensusData.csv";
         public static string indianStateCodeFilePath = @"F:\Program files(x64)\Microsoft Visual Studio\BridgeLabzAssignments\Indian-Census-Analyser\IndianCensusDataClass\IndianCensusDataClass\CSVFiles\IndiaStateCode.csv";
+       
         public static string wrongIndianStateCensusFilePath = @"C:\Program files(x64)\Microsoft Visual Studio\BridgeLabzAssignments\Indian-Census-Analyser\IndianCensusDataClass\IndianCensusDataClass\CSVFiles\IndiaStateCensusData.csv";
+        public static string wrongIndianStateCensusFileType = @"F:\Program files(x64)\Microsoft Visual Studio\BridgeLabzAssignments\Indian-Census-Analyser\IndianCensusDataClass\IndianCensusDataClass\CSVFiles\IndiaStateCensusData.txt";
 
         CensusAnalyser censusAnalyser;
         Dictionary<string, CensusDTO> totalRecord;
@@ -47,6 +49,15 @@ namespace NUnitTestCensusAnalyser
         {
             var indianStateCensusResult = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(CensusAnalyser.Country.INDIA, wrongIndianStateCensusFilePath, indianStateCensusHeaders));
             Assert.AreEqual(CensusAnalyserException.Exception.FILE_NOT_FOUND, indianStateCensusResult.exception);
+        }
+        /// <summary>
+        /// TC 1.3 - To pass a wrong file type and the correct file name and assert whether the custom exception of file not found is returned or not
+        /// </summary>
+        [Test]
+        public void GivenWrongFileType_ShouldReturnCustomException()
+        {
+            var indianStateCensusResult = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(CensusAnalyser.Country.INDIA, wrongIndianStateCensusFileType, indianStateCensusHeaders));
+            Assert.AreEqual(CensusAnalyserException.Exception.INVALID_FILE_TYPE, indianStateCensusResult.exception);
         }
 
     }
